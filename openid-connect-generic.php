@@ -179,7 +179,12 @@ class OpenID_Connect_Generic {
 		// Add actions to our scheduled cron jobs.
 		add_action( 'openid-connect-generic-cron-daily', array( $this, 'cron_states_garbage_collection' ) );
 
+<<<<<<< HEAD
 		$this->upgrade();
+=======
+        // Disable upgrading the plugin as development happens locally
+		// $this->upgrade();
+>>>>>>> master branch
 
 		if ( is_admin() ) {
 			OpenID_Connect_Generic_Settings_Page::register( $this->settings, $this->logger );

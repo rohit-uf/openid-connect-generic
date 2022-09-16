@@ -159,9 +159,16 @@ class OpenID_Connect_Generic_Client_Wrapper {
 		$redirect_url = home_url();
 
 		// If using the login form, default redirect to the admin dashboard.
+<<<<<<< HEAD
 		if ( isset( $GLOBALS['pagenow'] ) && 'wp-login.php' == $GLOBALS['pagenow'] ) {
 			$redirect_url = admin_url();
 		}
+=======
+        // @deleted Don't want this functionality
+		/*if ( isset( $GLOBALS['pagenow'] ) && 'wp-login.php' == $GLOBALS['pagenow'] ) {
+			$redirect_url = admin_url();
+		}*/
+>>>>>>> master branch
 
 		// Honor Core WordPress & other plugin redirects.
 		if ( isset( $_REQUEST['redirect_to'] ) ) {
@@ -253,6 +260,10 @@ class OpenID_Connect_Generic_Client_Wrapper {
 	 * @return void
 	 */
 	public function ensure_tokens_still_fresh() {
+<<<<<<< HEAD
+=======
+        error_log('checking tokens still fresh');
+>>>>>>> master branch
 		if ( ! is_user_logged_in() ) {
 			return;
 		}
@@ -322,11 +333,22 @@ class OpenID_Connect_Generic_Client_Wrapper {
 		$this->logger->log( $error );
 
 		// Redirect user back to login page.
+<<<<<<< HEAD
 		wp_redirect(
 			wp_login_url() .
 			'?login-error=' . $error->get_error_code() .
 			'&message=' . urlencode( $error->get_error_message() )
 		);
+=======
+		/*wp_redirect(
+			wp_login_url() .
+			'?login-error=' . $error->get_error_code() .
+			'&message=' . urlencode( $error->get_error_message() )
+		);*/
+        $error_message = apply_filters('openid_login_error_message', $error->get_error_message(), $error->get_error_code());
+        bp_core_add_message($error_message, 'error');
+        wp_redirect(home_url());
+>>>>>>> master branch
 		exit;
 	}
 
